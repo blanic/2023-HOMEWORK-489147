@@ -57,6 +57,7 @@ public class Borsa {
 				for(int j=i; j<numeroAttrezzi-1; j++) {
 					attrezzi[j]=attrezzi[j+1];
 				}
+				attrezzi[numeroAttrezzi-1] = null;
 			}
 		}
 		numeroAttrezzi--;

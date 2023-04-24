@@ -36,9 +36,17 @@ public class Partita {
 		this.stanzaCorrente = stanzaCorrente;
 	}
 
+	
+	
+	public Labirinto getLabirinto() {
+		return labirinto;
+	}
+
 	public Stanza getStanzaCorrente() {
 		return this.stanzaCorrente;
 	}
+	
+	
 	
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta

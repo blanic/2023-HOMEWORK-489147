@@ -33,6 +33,10 @@ public class Attrezzo {
 	public String getNome() {
 		return this.nome;
 	}
+	
+	public void setNome(String nomeAttrezzo) {
+		this.nome = nomeAttrezzo;
+	}
 
 	/**
 	 * Restituisce il peso dell'attrezzo
@@ -40,6 +44,10 @@ public class Attrezzo {
 	 */
 	public int getPeso() {
 		return this.peso;
+	}
+	
+	public void setPeso(int pesoAttrezzo) {
+		this.peso = pesoAttrezzo;
 	}
 
 	@Override

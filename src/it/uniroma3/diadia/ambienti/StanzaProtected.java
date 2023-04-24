@@ -1,5 +1,4 @@
 package it.uniroma3.diadia.ambienti;
-import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -13,23 +12,23 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @version base
 */
 
-public class Stanza {
+public class StanzaProtected {
 	
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
+	static final protected int NUMERO_MASSIMO_DIREZIONI = 4;
+	static final protected int NUMERO_MASSIMO_ATTREZZI = 10;
 	
-	private String nome;
-    private Attrezzo[] attrezzi;
-    private int numeroAttrezzi;
-    private Stanza[] stanzeAdiacenti;
-    private int numeroStanzeAdiacenti;
-	private String[] direzioni;
+	protected String nome;
+    protected Attrezzo[] attrezzi;
+    protected int numeroAttrezzi;
+    protected Stanza[] stanzeAdiacenti;
+    protected int numeroStanzeAdiacenti;
+	protected String[] direzioni;
     
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
      * @param nome il nome della stanza
      */
-    public Stanza(String nome) {
+    public StanzaProtected(String nome) {
         this.nome = nome;
         this.numeroStanzeAdiacenti = 0;
         this.numeroAttrezzi = 0;
@@ -68,7 +67,6 @@ public class Stanza {
 		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
         	if (this.direzioni[i].equals(direzione))
         		stanza = this.stanzeAdiacenti[i];
-		
         return stanza;
 	}
 
@@ -173,7 +171,6 @@ public class Stanza {
 				for(int j=i; j<numeroAttrezzi-1; j++) {
 					attrezzi[j]=attrezzi[j+1];
 				}
-				attrezzi[numeroAttrezzi-1] = null;
 				numeroAttrezzi--;
 				rimosso = true;	
 			}
