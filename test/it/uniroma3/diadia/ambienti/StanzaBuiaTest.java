@@ -11,7 +11,7 @@ public class StanzaBuiaTest {
 
 	private static final String NOME_STANZA = "Stanza Di Test";
 	private static final String ATTREZZO_PER_VEDERE = "Lanterna";
-	private static final String MESSAGGIO_STANZA_BUIA = "qui c'è un buio pesto";
+	private static final String MESSAGGIO_STANZA_BUIA = "Qui c'è un buio pesto";
 
 
 	Stanza stanzaBuia;

@@ -38,4 +38,19 @@ public class StanzaMagica extends Stanza {
 		
 		return attrezzo;
 	}
+	
+	@Override
+	public int hashCode() {
+		return (super.hashCode() + sogliaMagica);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this.getClass() != o.getClass()) {
+			return false;
+		}
+		StanzaMagica that = (StanzaMagica)o;	
+		return (super.equals(that) && 
+				this.sogliaMagica == that.sogliaMagica);
+	}
 }

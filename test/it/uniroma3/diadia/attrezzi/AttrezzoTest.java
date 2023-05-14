@@ -39,7 +39,7 @@ public class AttrezzoTest {
 	
 	@Test
 	public void testAttrezzoEqualsAttrezziNomeUgualePesoDiverso() {
-		assertNotEquals(attrezzo, attrezzoNomeUgualePesoDiverso);
+		assertEquals(attrezzo, attrezzoNomeUgualePesoDiverso);
 	}
 	
 	@Test

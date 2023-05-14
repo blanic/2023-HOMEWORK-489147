@@ -1,6 +1,9 @@
 package it.uniroma3.diadia.ambienti;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,17 +11,16 @@ import org.junit.Test;
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
-import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBloccataTest {
 
-	private static final String NOME_STANZA_INIZIALE = "Stanza di test";
-	private static final String NOME_ADIACENTE_BLOCCATA = "Stanza bloccata";
-	private static final String NOME_ADIACENTE_SBLOCCATA = "Stanza sbloccata";
+	private static final String NOME_STANZA_INIZIALE = "stanza iniziale";
+	private static final String NOME_ADIACENTE_BLOCCATA = "stanza bloccata";
+	private static final String NOME_ADIACENTE_SBLOCCATA = "stanza sbloccata";
 	private static final String DIREZIONE_BLOCCATA = "nord";
-	private static final String DIREZIONE_LIBERA = "sud";
-	private static final String ATTREZZO_SBLOCCANTE = "Chiave";
+	private static final String DIREZIONE_LIBERA = "ovest";
+	private static final String ATTREZZO_SBLOCCANTE = "chiave";
 	private static final String ATTREZZO_INUTILE = "Piuma";
 	private static final int PESO_ATTREZZO = 1;
 
@@ -33,15 +35,22 @@ public class StanzaBloccataTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.io = new IOConsole();
-		this.diadia = new DiaDia(io);
+		List<String> stanze = Arrays.asList(NOME_STANZA_INIZIALE, NOME_ADIACENTE_SBLOCCATA);
+		LabirintoBuilder labbuilder = new LabirintoBuilder()
+				.addStanze(stanze)
+				.addStanzaBloccata(NOME_STANZA_INIZIALE, DIREZIONE_BLOCCATA, ATTREZZO_SBLOCCANTE)
+				.setStanzaIniziale(NOME_STANZA_INIZIALE)
+				.addAdiacenza(NOME_STANZA_INIZIALE,NOME_ADIACENTE_BLOCCATA,DIREZIONE_BLOCCATA)
+				.addAdiacenza(NOME_STANZA_INIZIALE,NOME_ADIACENTE_SBLOCCATA,DIREZIONE_LIBERA);
 		
-		this.stanzaIniziale = new StanzaBloccata(NOME_STANZA_INIZIALE, DIREZIONE_BLOCCATA, ATTREZZO_SBLOCCANTE);
-		this.stanzaAdiacenteBloccata = new Stanza(NOME_ADIACENTE_BLOCCATA);
-		this.stanzaAdiacenteNonBloccata = new Stanza(NOME_ADIACENTE_SBLOCCATA);
-
-		this.stanzaIniziale.impostaStanzaAdiacente(DIREZIONE_BLOCCATA, stanzaAdiacenteBloccata);
-		this.stanzaIniziale.impostaStanzaAdiacente(DIREZIONE_LIBERA, stanzaAdiacenteNonBloccata);
+		Labirinto labirinto = labbuilder.getLabirinto();
+		
+		this.io = new IOConsole();
+		this.diadia = new DiaDia(io, labirinto);
+		
+		this.stanzaIniziale = labbuilder.getStanza(NOME_STANZA_INIZIALE);
+		this.stanzaAdiacenteBloccata = labbuilder.getStanza(NOME_ADIACENTE_BLOCCATA);
+		this.stanzaAdiacenteNonBloccata = labbuilder.getStanza(NOME_ADIACENTE_SBLOCCATA);
 		
 		this.attrezzoSbloccante = new Attrezzo(ATTREZZO_SBLOCCANTE, PESO_ATTREZZO);
 		this.attrezzoInutile = new Attrezzo(ATTREZZO_INUTILE, PESO_ATTREZZO);

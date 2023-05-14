@@ -1,8 +1,12 @@
 package it.uniroma3.diadia;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.ComandoFine;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
@@ -34,8 +38,8 @@ public class DiaDia {
 	private Partita partita;
 	public static IO io;
 
-	public DiaDia(IO io) {
-		this.partita = new Partita();
+	public DiaDia(IO io, Labirinto labirinto) {
+		this.partita = new Partita(labirinto);
 		DiaDia.io = io;
 	}
 
@@ -63,6 +67,9 @@ public class DiaDia {
 	 */
 	public boolean processaIstruzione(String istruzione) {
 		
+		if(istruzione == null) {
+			return true;
+		}
 		FabbricaDiComandi fabbricaComandi = new FabbricaDiComandiFisarmonica();
 		Comando comandoDaEseguire = fabbricaComandi.costruisciComando(istruzione);
 		
@@ -87,7 +94,32 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		List<String> stanze = Arrays.asList("Aula N10","Biblioteca");
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanze(stanze)
+				.addStanzaBloccata("Atrio", "nord", "chiave")
+				.addStanzaBuia("Aula N11", "lanterna")
+				.addStanzaMagica("Laboratorio")
+				.setStanzaIniziale("Atrio")
+				.setStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio","Biblioteca","nord")
+				.addAdiacenza("Atrio","Aula N11","est")
+				.addAdiacenza("Atrio","Aula N10","sud")
+				.addAdiacenza("Atrio","Laboratorio","ovest")
+				.addAdiacenza("Aula N11","Laboratorio","est")
+				.addAdiacenza("Aula N11","Atrio","ovest")
+				.addAdiacenza("Aula N10","Atrio","nord")
+				.addAdiacenza("Aula N10","Aula N11","est")
+				.addAdiacenza("Aula N10","Laboratorio","ovest")
+				.addAdiacenza("Laboratorio","Atrio","est")
+				.addAdiacenza("Laboratorio","Aula N11","ovest")
+				.addAdiacenza("Biblioteca","Atrio","sud")
+				.addAttrezzoAStanza("Aula N10", "lanterna", 5)
+				.addAttrezzoAStanza("Laboratorio", "osso", 8)
+				.addAttrezzoAStanza("Aula N11", "chiave", 1)
+				.getLabirinto();
+		
+		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
 	}
 }

@@ -12,6 +12,10 @@ public class LabirintoTest {
 	@Before
 	public void setup(){
 		this.labirinto = new Labirinto();
+		Stanza stanzaVincente = new Stanza("stanzaVincente");
+		Stanza stanzaIniziale = new Stanza("stanzaIniziale");
+		this.labirinto.setStanzaIniziale(stanzaIniziale);
+		this.labirinto.setStanzaVincente(stanzaVincente);
 	}
 
 	@Test

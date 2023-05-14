@@ -54,10 +54,15 @@ public class Attrezzo {
 	public boolean equals(Object o) {
 		boolean uguale = false;
 		Attrezzo attrezzo = (Attrezzo)o;
-		if(this.getNome().equals(attrezzo.getNome()) && this.getPeso()==attrezzo.getPeso()) {
+		if(this.getNome().equals(attrezzo.getNome())){
 			uguale = true;
 		}
 		return uguale;	
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode();
 	}
 	
 	/**
@@ -68,5 +73,7 @@ public class Attrezzo {
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
+	
+	
 
 }

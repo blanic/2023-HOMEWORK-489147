@@ -2,9 +2,14 @@ package it.uniroma3.diadia;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
@@ -13,7 +18,14 @@ public class PartitaTest {
 	
 	@Before
 	public void setup() {
-		this.partita = new Partita();
+		List<String> stanze = Arrays.asList("Atrio","Biblioteca");
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanze(stanze)
+				.setStanzaIniziale("Atrio")
+				.setStanzaVincente("Biblioteca")
+				.getLabirinto();
+		this.partita = new Partita(labirinto);
+		
 	}
 
 	@Test

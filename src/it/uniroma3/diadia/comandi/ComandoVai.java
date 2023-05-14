@@ -11,7 +11,7 @@ public class ComandoVai implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		if (direzione==null) {
-			DiaDia.io.mostraMessaggio("Dove vuoi andare ? \n Devi specificare una direzione.");
+			DiaDia.io.mostraMessaggio("Dove vuoi andare ? \nDevi specificare una direzione.");
 			return;
 		}
 		Stanza prossimaStanza = null;

@@ -2,6 +2,9 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,9 +37,9 @@ public class StanzaTest {
 	@Test
 	public void testGetAttrezzi() {
 		this.stanza.addAttrezzo(attrezzo);
-		Attrezzo[] attrezzi = new Attrezzo[10];
-		attrezzi[0] = attrezzo;
-		assertArrayEquals(attrezzi, this.stanza.getAttrezzi());
+		Map<String,Attrezzo> attrezziTest = new HashMap<>();
+		attrezziTest.put(attrezzo.getNome(), attrezzo);
+		assertEquals(attrezziTest, this.stanza.getAttrezzi());
 	}
 
 	@Test
