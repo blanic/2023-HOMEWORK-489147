@@ -5,7 +5,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 	
 	private String nomeAttrezzo;
 
@@ -29,11 +29,6 @@ public class ComandoPosa implements Comando {
 			else DiaDia.io.mostraMessaggio("Impossibile posare l'attrezzo.");
 		}
 
-	}
-
-	@Override
-	public String getNome() {
-		return this.getClass().toString();
 	}
 	
 	@Override

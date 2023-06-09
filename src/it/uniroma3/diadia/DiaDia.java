@@ -1,16 +1,16 @@
 package it.uniroma3.diadia;
 
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.ComandoFine;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
  * Per giocare crea un'istanza di questa classe e invoca il letodo gioca
@@ -45,7 +45,7 @@ public class DiaDia {
 
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;
+//		Scanner scannerDiLinee;
 
 //		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 //		scannerDiLinee = new Scanner(System.in);		
@@ -64,13 +64,14 @@ public class DiaDia {
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws Exception 
 	 */
-	public boolean processaIstruzione(String istruzione) {
+	public boolean processaIstruzione(String istruzione){
 		
 		if(istruzione == null) {
 			return true;
 		}
-		FabbricaDiComandi fabbricaComandi = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandi fabbricaComandi = new FabbricaDiComandiRiflessiva();
 		Comando comandoDaEseguire = fabbricaComandi.costruisciComando(istruzione);
 		
 		comandoDaEseguire.esegui(this.partita);
@@ -92,34 +93,12 @@ public class DiaDia {
 		return this.partita;
 	}
 
-	public static void main(String[] argc) {
-		IO io = new IOConsole();
-		List<String> stanze = Arrays.asList("Aula N10","Biblioteca");
-		Labirinto labirinto = new LabirintoBuilder()
-				.addStanze(stanze)
-				.addStanzaBloccata("Atrio", "nord", "chiave")
-				.addStanzaBuia("Aula N11", "lanterna")
-				.addStanzaMagica("Laboratorio")
-				.setStanzaIniziale("Atrio")
-				.setStanzaVincente("Biblioteca")
-				.addAdiacenza("Atrio","Biblioteca","nord")
-				.addAdiacenza("Atrio","Aula N11","est")
-				.addAdiacenza("Atrio","Aula N10","sud")
-				.addAdiacenza("Atrio","Laboratorio","ovest")
-				.addAdiacenza("Aula N11","Laboratorio","est")
-				.addAdiacenza("Aula N11","Atrio","ovest")
-				.addAdiacenza("Aula N10","Atrio","nord")
-				.addAdiacenza("Aula N10","Aula N11","est")
-				.addAdiacenza("Aula N10","Laboratorio","ovest")
-				.addAdiacenza("Laboratorio","Atrio","est")
-				.addAdiacenza("Laboratorio","Aula N11","ovest")
-				.addAdiacenza("Biblioteca","Atrio","sud")
-				.addAttrezzoAStanza("Aula N10", "lanterna", 5)
-				.addAttrezzoAStanza("Laboratorio", "osso", 8)
-				.addAttrezzoAStanza("Aula N11", "chiave", 1)
-				.getLabirinto();
-		
+	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
+		Scanner scanner = new Scanner(System.in);
+		IO io = new IOConsole(scanner);
+		Labirinto labirinto = new LabirintoBuilder("labirinto1.txt").getLabirinto();
 		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
+		scanner.close();
 	}
 }

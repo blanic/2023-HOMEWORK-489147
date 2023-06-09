@@ -15,23 +15,25 @@ public class StanzaTest {
 	Stanza stanza;
 	Stanza stanzaAdiacente;
 	Attrezzo attrezzo;
+	Direzione direzioneNord;
 	
 	@Before
 	public void setUp() {
 		this.stanza = new Stanza("Stanza");
 		this.stanzaAdiacente = new Stanza("StanzaAdiacente");
 		this.attrezzo = new Attrezzo("Attrezzo", 1);
+		this.direzioneNord = Direzione.valueOf("nord");
 	}
 
 	@Test
 	public void testImpostaStanzaAdiacente() {
-		this.stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
-		assertEquals(stanzaAdiacente, this.stanza.getStanzaAdiacente("nord"));
+		this.stanza.impostaStanzaAdiacente(direzioneNord, stanzaAdiacente);
+		assertEquals(stanzaAdiacente, this.stanza.getStanzaAdiacente(direzioneNord));
 	}
 
 	@Test
 	public void testGetStanzaAdiacenteNonPresente() {
-		assertNull(this.stanza.getStanzaAdiacente("nord"));
+		assertNull(this.stanza.getStanzaAdiacente(direzioneNord));
 	}
 
 	@Test
@@ -51,8 +53,8 @@ public class StanzaTest {
 	@Test
 	public void testToString() {
 		this.stanza.addAttrezzo(attrezzo);
-		this.stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
-		assertEquals("Stanza\nUscite:  nord\nAttrezzi nella stanza: Attrezzo (1kg) ", this.stanza.toString());
+		this.stanza.impostaStanzaAdiacente(direzioneNord, stanzaAdiacente);
+		assertEquals("Stanza\nUscite:  nord\nAttrezzi nella stanza: Attrezzo (1kg) \nPersonaggio nella stanza: Nessun personaggio nella stanza", this.stanza.toString());
 	}
 	
 	@Test

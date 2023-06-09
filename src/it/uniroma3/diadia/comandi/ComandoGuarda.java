@@ -6,7 +6,7 @@ import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 
 	private String parametro;
 
@@ -19,12 +19,10 @@ public class ComandoGuarda implements Comando {
 			if(this.parametro.equals("borsa")) {
 				List<Attrezzo> contenutoBorsa = partita.getGiocatore().getBorsa().getContenutoOrdinatoPerPeso();
 				if(contenutoBorsa.isEmpty()) {
-					DiaDia.io.mostraMessaggio("Borsa vuota");
+					DiaDia.io.mostraMessaggio("Borsa vuota"+" CFU:"+partita.getGiocatore().getCfu());
 				}
 				else {
-					for(Attrezzo attrezzo : contenutoBorsa) {
-						DiaDia.io.mostraMessaggio(attrezzo.toString()+"\n");
-					}
+						DiaDia.io.mostraMessaggio(partita.getGiocatore().getBorsa()+"\n"+"CFU:"+partita.getGiocatore().getCfu());
 				}
 				
 			}
@@ -40,14 +38,8 @@ public class ComandoGuarda implements Comando {
 	}
 
 	@Override
-	public String getNome() {
-		return this.getClass().toString();
-	}
-
-	@Override
 	public void setParametro(String parametro) {
 		this.parametro = parametro;
-
 	}
 
 	@Override

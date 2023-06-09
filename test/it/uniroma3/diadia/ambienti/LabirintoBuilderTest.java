@@ -7,22 +7,25 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 
 public class LabirintoBuilderTest {
 	
 	private static final String NOME_STANZA_1 = "stanza1";
 	private static final String NOME_STANZA_2 = "stanza2";
+	private static final String NOME_DIREZIONE_NORD = "nord";
 
 	private LabirintoBuilder labirintobuilder;
 	private Stanza stanza1;
 	private Stanza stanza2;
+	Direzione direzioneNord;
 
 	@Before
 	public void setUp() throws Exception {
 		this.labirintobuilder = new LabirintoBuilder();
 		this.stanza1 = new Stanza(NOME_STANZA_1);
 		this.stanza2 = new Stanza(NOME_STANZA_2);
+		direzioneNord = Direzione.valueOf(NOME_DIREZIONE_NORD);
 	}
 	
 
@@ -64,8 +67,8 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testAddStanzaBloccata() {
-		Stanza stanzaBloccata = new StanzaBloccata(NOME_STANZA_1,"nord","chiave");
-		this.labirintobuilder.addStanzaBloccata(NOME_STANZA_1,"nord","chiave");
+		Stanza stanzaBloccata = new StanzaBloccata(NOME_STANZA_1,direzioneNord,"chiave");
+		this.labirintobuilder.addStanzaBloccata(NOME_STANZA_1,NOME_DIREZIONE_NORD,"chiave");
 		assertEquals(StanzaBloccata.class, this.labirintobuilder.getStanza(NOME_STANZA_1).getClass());
 		assertEquals(stanzaBloccata, this.labirintobuilder.getStanza(NOME_STANZA_1));
 	}
@@ -92,10 +95,10 @@ public class LabirintoBuilderTest {
 		Stanza stanza = this.labirintobuilder.getStanza(NOME_STANZA_1);
 		Stanza stanzaAdiacente = this.labirintobuilder.getStanza(NOME_STANZA_2);		
 		assertTrue(stanza.getDirezioni().isEmpty());
-		assertNull(stanza.getStanzaAdiacente("nord"));
-		this.labirintobuilder.addAdiacenza(NOME_STANZA_1, NOME_STANZA_2, "nord");
-		assertTrue(stanza.getDirezioni().contains("nord"));
-		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente("nord"));
+		assertNull(stanza.getStanzaAdiacente(direzioneNord));
+		this.labirintobuilder.addAdiacenza(NOME_STANZA_1, NOME_STANZA_2, NOME_DIREZIONE_NORD);
+		assertTrue(stanza.getDirezioni().contains(direzioneNord));
+		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente(direzioneNord));
 	}
 
 	@Test

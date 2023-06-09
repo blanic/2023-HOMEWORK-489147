@@ -15,7 +15,6 @@ public class StanzaMagicaTest {
 	final static private int PESO_ATTREZZO = 1;
 
 	private int sogliaMagica;
-	private int contatoreAttrezziPosati;
 	private Stanza stanzaMagica;
 	private Attrezzo attrezzo;
 	private Attrezzo attrezzoCopia;

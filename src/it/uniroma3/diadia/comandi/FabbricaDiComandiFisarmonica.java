@@ -48,6 +48,7 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 			comando = new ComandoNonValido();
 
 
+		scannerDiParole.close();
 		return comando;
 	}
 

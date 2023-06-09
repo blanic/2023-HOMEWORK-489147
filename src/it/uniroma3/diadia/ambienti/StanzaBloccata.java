@@ -8,10 +8,10 @@ public class StanzaBloccata extends Stanza {
 	//	private static final String ATTREZZO_SBLOCCANTE = "Piede di porco";
 	private static final String MESSAGGIO_DIREZIONE_BLOCCATA = "Il Passaggio è bloccato!";
 
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 	private String attrezzoSbloccante;
 
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccante) {
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String attrezzoSbloccante) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.attrezzoSbloccante = attrezzoSbloccante;
@@ -23,8 +23,9 @@ public class StanzaBloccata extends Stanza {
 	//	}
 	//
 	//	
+	
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		if(!direzione.equals(this.direzioneBloccata) || super.hasAttrezzo(attrezzoSbloccante)) {
 			if (direzione.equals(this.direzioneBloccata)) {
 				DiaDia.io.mostraMessaggio("Hai sbloccato il passaggio!");
@@ -57,12 +58,12 @@ public class StanzaBloccata extends Stanza {
 	}
 
 
-	public void setDirezioneBloccata(String direzioneBloccata) {
+	public void setDirezioneBloccata(Direzione direzioneBloccata) {
 		this.direzioneBloccata = direzioneBloccata;
 	}
 
 
-	public String getDirezioneBloccata() {
+	public Direzione getDirezioneBloccata() {
 		return direzioneBloccata;
 	}
 

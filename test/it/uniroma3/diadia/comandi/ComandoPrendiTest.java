@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -45,7 +46,7 @@ public class ComandoPrendiTest {
 				.addStanze(stanze)
 				.setStanzaIniziale("stanza unica")
 			    .getLabirinto();
-		this.io = new IOConsole();
+		this.io = new IOConsole(new Scanner(System.in));
 		this.diadia = new DiaDia(io, labirinto);
 		this.partita = this.diadia.getPartita();
 		this.borsaGiocatore = this.partita.getGiocatore().getBorsa();

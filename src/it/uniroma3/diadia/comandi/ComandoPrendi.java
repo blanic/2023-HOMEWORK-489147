@@ -5,7 +5,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 
 	private String nomeAttrezzo;
 
@@ -29,21 +29,16 @@ public class ComandoPrendi implements Comando {
 			else DiaDia.io.mostraMessaggio("Impossibile prendere l'attrezzo.");
 		}
 	}
-
+	
 	@Override
-	public String getNome() {
-		return this.getClass().toString();
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 
 	@Override
 	public void setParametro(String nomeAttrezzo) {
-		this.nomeAttrezzo = nomeAttrezzo;		
+		this.nomeAttrezzo = nomeAttrezzo;
+		
 	}
-
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;	
-	}
-
 
 }

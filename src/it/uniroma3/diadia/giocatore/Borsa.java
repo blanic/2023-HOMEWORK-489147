@@ -10,12 +10,13 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import it.uniroma3.diadia.CaricatoreCostanti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatoreAttrezziPerNome;
 import it.uniroma3.diadia.attrezzi.ComparatoreAttrezziPerPeso;
 
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	public final static int DEFAULT_PESO_MAX_BORSA = CaricatoreCostanti.getPesoMax();
 	private Map<String,Attrezzo> attrezzi;
 	private int pesoMax;
 
@@ -83,8 +84,9 @@ public class Borsa {
 			for(Attrezzo attrezzo : this.attrezzi.values())
 				s.append(attrezzo.toString()+" ");
 		}
-		else
+		else {
 			s.append("Borsa vuota");
+		}
 		return s.toString();
 	}
 
